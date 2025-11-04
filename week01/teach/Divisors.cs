@@ -19,6 +19,13 @@ public static class Divisors {
     private static List<int> FindDivisors(int number) {
         List<int> results = new();
         // TODO problem 1
+        for (int i = 1; i < number; i++) // Start from 1, exclude the number itself
+            {
+                if (number % i == 0) // Check if i is a divisor. Modulo operator returns 0 if 'number' is divisible by 'i'
+                {
+                    results.Add(i); // Add to the list
+                }
+            }
         return results;
     }
 }
