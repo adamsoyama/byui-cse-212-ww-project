@@ -54,4 +54,38 @@ public class PriorityQueueTests
             Assert.AreEqual("The queue is empty.", ex.Message);
         }
     }
+
+    [TestMethod]
+    // Scenario: Enqueue items with descending priorities and ensure highest priority is still selected first.
+    // Expected Result: Dequeue returns "A" (priority 10), then "B" (priority 9), then "C" (priority 8)
+    // Defect(s) Found: No defect found; priority comparison works correctly.
+    public void TestPriorityQueue_DescendingPriorities()
+    {
+        var priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("A", 10);
+        priorityQueue.Enqueue("B", 9);
+        priorityQueue.Enqueue("C", 8);
+
+        Assert.AreEqual("A", priorityQueue.Dequeue());
+        Assert.AreEqual("B", priorityQueue.Dequeue());
+        Assert.AreEqual("C", priorityQueue.Dequeue());
+    }
+
+    [TestMethod]
+    // Scenario: Enqueue items with mixed priorities and verify queue state after partial dequeue.
+    // Expected Result: After one dequeue, queue contains remaining items in correct order.
+    // Defect(s) Found: No defect found; queue maintains correct state after removal.
+    public void TestPriorityQueue_PartialDequeueState()
+    {
+        var priorityQueue = new PriorityQueue();
+        priorityQueue.Enqueue("A", 1);
+        priorityQueue.Enqueue("B", 3);
+        priorityQueue.Enqueue("C", 2);
+
+        Assert.AreEqual("B", priorityQueue.Dequeue()); // Highest priority
+
+        // Remaining should be: A (1), C (2)
+        Assert.AreEqual("C", priorityQueue.Dequeue());
+        Assert.AreEqual("A", priorityQueue.Dequeue());
+    }
 }
