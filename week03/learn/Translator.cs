@@ -6,35 +6,28 @@ public class Translator
         englishToGerman.AddWord("House", "Haus");
         englishToGerman.AddWord("Car", "Auto");
         englishToGerman.AddWord("Plane", "Flugzeug");
-        Console.WriteLine(englishToGerman.Translate("Car")); // Auto
-        Console.WriteLine(englishToGerman.Translate("Plane")); // Flugzeug
-        Console.WriteLine(englishToGerman.Translate("Train")); // ???
+
+        Console.WriteLine(englishToGerman.Translate("Car"));     // Output: Auto
+        Console.WriteLine(englishToGerman.Translate("Plane"));   // Output: Flugzeug
+        Console.WriteLine(englishToGerman.Translate("Train"));   // Output: ???
     }
 
     private Dictionary<string, string> _words = new();
 
     /// <summary>
-    /// Add the translation from 'from_word' to 'to_word'
-    /// For example, in a english to german dictionary:
-    /// 
-    /// my_translator.AddWord("book","buch")
+    /// Adds a translation from 'fromWord' to 'toWord'.
+    /// If the word already exists, it updates the translation.
     /// </summary>
-    /// <param name="fromWord">The word to translate from</param>
-    /// <param name="toWord">The word to translate to</param>
-    /// <returns>fixed array of divisors</returns>
     public void AddWord(string fromWord, string toWord)
     {
-        // ADD YOUR CODE HERE
+        _words[fromWord] = toWord;
     }
 
     /// <summary>
-    /// Translates the from word into the word that this stores as the translation
+    /// Translates the given word. If not found, returns "???".
     /// </summary>
-    /// <param name="fromWord">The word to translate</param>
-    /// <returns>The translated word or "???" if no translation is available</returns>
     public string Translate(string fromWord)
     {
-        // ADD YOUR CODE HERE
-        return "";
+        return _words.TryGetValue(fromWord, out var translation) ? translation : "???";
     }
 }
